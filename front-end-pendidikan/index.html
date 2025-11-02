@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistem Informasi Pendidikan — Landing Page</title>
+  
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="aset/css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">EduLink</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#features">Fitur</a></li>
+        <li class="nav-item"><a class="nav-link" href="#catalog">Katalog</a></li>
+        <li class="nav-item"><a class="nav-link" href="#register">Daftar</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero py-5">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <h1 class="display-6 fw-bold">Platform Pembelajaran Digital untuk Sekolah & Guru</h1>
+        <p class="lead text-muted">Kelola materi, tugas, dan peserta didik dalam satu tempat — dibuat sederhana untuk pendidik dan siswa.</p>
+        <div class="d-flex gap-2">
+          <a href="#register" class="btn btn-primary btn-lg">Daftar Sekarang</a>
+          <a href="#catalog" class="btn btn-outline-secondary btn-lg">Lihat Katalog</a>
+        </div>
+        <div class="mt-4">
+          <small class="text-muted">Contoh fitur: manajemen kelas, penilaian otomatis, forum diskusi, dashboard kemajuan.</small>
+        </div>
+      </div>
+      <div class="col-lg-5 mt-4 mt-lg-0">
+        <div class="card p-3 shadow-sm">
+          <div class="mb-3 d-flex justify-content-between align-items-center">
+            <div>
+              <div class="fw-bold">Statistik Singkat</div>
+              <small class="text-muted">Data contoh untuk tampilan dashboard</small>
+            </div>
+            <span class="badge bg-primary badge-rounded">Beta</span>
+          </div>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2">Siswa terdaftar: <strong>1.234</strong></li>
+            <li class="mb-2">Kursus aktif: <strong>24</strong></li>
+            <li class="mb-2">Tugas menunggu: <strong>12</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="py-5">
+  <div class="container">
+    <div class="row text-center mb-4">
+      <div class="col-md-8 mx-auto">
+        <h2 class="h4 fw-bold">Fitur Utama</h2>
+        <p class="text-muted">Dirancang untuk memudahkan pengelolaan proses belajar mengajar.</p>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-3">
+        <div class="card p-3 h-100 card-hover">
+          <h5 class="fw-semibold">Manajemen Kelas</h5>
+          <p class="small text-muted mb-0">Buat kelas, undang siswa, dan atur jadwal.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 h-100 card-hover">
+          <h5 class="fw-semibold">Pengumpulan & Penilaian</h5>
+          <p class="small text-muted mb-0">Tugas online dengan penilaian manual atau otomatis.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 h-100 card-hover">
+          <h5 class="fw-semibold">Forum Diskusi</h5>
+          <p class="small text-muted mb-0">Ruang tanya jawab untuk siswa dan guru.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 h-100 card-hover">
+          <h5 class="fw-semibold">Dashboard Performa</h5>
+          <p class="small text-muted mb-0">Visualisasi progres belajar dan nilai.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSE CATALOG -->
+<section id="catalog" class="py-5 bg-light">
+  <div class="container">
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-6">
+        <h3 class="h5">Katalog Kursus</h3>
+        <p class="text-muted small mb-0">Temukan materi yang sesuai untuk jenjangmu.</p>
+      </div>
+      <div class="col-md-6">
+        <div class="input-group">
+          <input id="searchInput" type="text" class="form-control" placeholder="Cari kursus (contoh: Matematika, Bahasa)">
+          <button id="searchBtn" class="btn btn-outline-secondary">Cari</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="courses" class="row g-3">
+      <div class="col-md-4 course-card" data-tags="matematika dasar">
+        <div class="card h-100 p-3">
+          <h5>Matematika Dasar</h5>
+          <p class="small text-muted">Untuk siswa SMP - aljabar & geometri dasar.</p>
+          <div class="mt-auto d-flex justify-content-between align-items-center">
+            <span class="small text-muted">Durasi: 6 minggu</span>
+            <a href="#register" class="btn btn-sm btn-primary">Ikut</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 course-card" data-tags="bahasa indonesia menulis">
+        <div class="card h-100 p-3">
+          <h5>Menulis Kreatif</h5>
+          <p class="small text-muted">Belajar teknik menulis essai dan cerita pendek.</p>
+          <div class="mt-auto d-flex justify-content-between align-items-center">
+            <span class="small text-muted">Durasi: 4 minggu</span>
+            <a href="#register" class="btn btn-sm btn-primary">Ikut</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 course-card" data-tags="pemrograman python dasar">
+        <div class="card h-100 p-3">
+          <h5>Pemrograman Python</h5>
+          <p class="small text-muted">Dasar-dasar coding menggunakan Python untuk pemula.</p>
+          <div class="mt-auto d-flex justify-content-between align-items-center">
+            <span class="small text-muted">Durasi: 8 minggu</span>
+            <a href="#register" class="btn btn-sm btn-primary">Ikut</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRATION -->
+<section id="register" class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h3 class="h5">Form Pendaftaran Peserta</h3>
+        <p class="text-muted small">Isi data untuk mendaftar ke kursus.</p>
+        <form id="regForm" class="mt-3">
+          <div class="mb-3">
+            <label class="form-label">Nama Lengkap</label>
+            <input id="name" type="text" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input id="email" type="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Pilih Kursus</label>
+            <select id="courseSelect" class="form-select">
+              <option value="Matematika Dasar">Matematika Dasar</option>
+              <option value="Menulis Kreatif">Menulis Kreatif</option>
+              <option value="Pemrograman Python">Pemrograman Python</option>
+            </select>
+          </div>
+          <div class="mb-3 form-check">
+            <input id="agree" class="form-check-input" type="checkbox" required>
+            <label class="form-check-label">Saya setuju menerima informasi via email</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Kirim Pendaftaran</button>
+        </form>
+        <div id="regMsg" class="mt-3" style="display:none"></div>
+      </div>
+
+      <div class="col-lg-6 mt-4 mt-lg-0">
+        <h5 class="h6">Panduan Singkat</h5>
+        <ol>
+          <li>Isi data lengkap dengan email aktif.</li>
+          <li>Pilih kursus yang ingin diikuti.</li>
+          <li>Tunggu email konfirmasi (contoh: sistem sementara — integrasi backend diperlukan).</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-4 bg-white border-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h6>Butuh Bantuan?</h6>
+        <p class="small text-muted">Email: support@edulink.example</p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <small class="text-muted">© 2025 EduLink — Proyek Front-end Pendidikan</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="aset/js/main.js"></script>
+
+</body>
+</html>
