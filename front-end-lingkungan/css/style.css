@@ -5,7 +5,7 @@
   --card: #ffffff;
   --accent: #f7c948;
   --radius: 14px;
-  --max-width: 1100px;
+  --max-width: 1500px;
   --fw-heading: 800;
   --fw-body: 400;
   --transition: 300ms;
@@ -51,11 +51,8 @@ body {
   justify-content: space-between;
   padding: 1rem 0;
 }
-.brand a {
-  color: var(--green);
-  font-weight: 800;
-  font-size: 1.25rem;
-  text-decoration: none;
+.brand a img {
+  width: 140px;
 }
 
 /* nav */
@@ -232,13 +229,14 @@ body {
   padding: 4rem 0;
 }
 .about-inner {
+  /* Layout Desktop/Laptop: Flex (Teks dan Carousel Berdampingan) */
   display: flex;
   gap: 2rem;
   align-items: flex-start;
   flex-wrap: wrap;
 }
 .about-text {
-  flex: 1 1 420px;
+  flex: 1 1 250px;
 }
 .about-text h2 {
   font-size: 1.9rem;
@@ -249,7 +247,7 @@ body {
   color: var(--muted);
 }
 .about-carousel {
-  flex: 1 1 360px;
+  flex: 1 1 100px;
   position: relative;
 }
 .carousel-track {
@@ -291,6 +289,7 @@ body {
   padding: 3rem 0;
 }
 .contrib-grid {
+  /* Layout Desktop/Laptop: Grid 3 Kolom */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.75rem;
@@ -317,6 +316,20 @@ body {
 .pill:hover {
   transform: translateY(-6px);
 }
+
+/* Link di dalam pill (Mulai, Daftar, Donasi) */
+.link {
+  text-decoration: none;
+  color: var(--green); 
+  font-weight: 700;
+  transition: color var(--transition), text-decoration var(--transition);
+}
+
+.link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 .icon-circle {
   width: 110px;
   height: 110px;
@@ -328,11 +341,8 @@ body {
   justify-content: center;
 }
 .icon-circle img {
-  width: 54px;
-  filter: brightness(10) invert(1) saturate(120%);
-}
-a .link {
-  text-decoration
+  width: 80px;
+
 }
 
 /* FORM */
@@ -377,11 +387,29 @@ a .link {
   justify-content: space-between;
   gap: 1rem;
 }
+/* Styling default untuk link sosial media di footer */
 .socials a {
-  margin-left: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  color: var(--muted);
+    margin-left: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--muted); /* Warna default untuk link */
+}
+
+/* Styling KHUSUS untuk ikon Feather (SVG) di dalam link sosial media */
+.socials a i,
+.socials a svg {
+    /* Feather icons mengganti <i> dengan <svg> */
+    width: 24px; /* Atur ukuran ikon */
+    height: 24px;
+    stroke: var(--muted); /* Gunakan stroke untuk mewarnai SVG */
+    stroke-width: 2.5; /* Ketebalan garis ikon */
+    transition: stroke var(--transition);
+    vertical-align: middle; /* Memastikan ikon sejajar dengan teks jika ada */
+}
+
+/* Styling hover untuk ikon */
+.socials a:hover svg {
+    stroke: #333; /* Warna ikon berubah saat dihover */
 }
 
 /* responsive */
@@ -402,7 +430,7 @@ a .link {
 }
 
 @media (max-width: 640px) {
-  /* Navigasi mobile */
+  /* Navigasi mobile - OVERLAY */
   .main-nav {
     position: fixed;
     top: 0;
@@ -411,12 +439,17 @@ a .link {
     height: 100vh;
     background: var(--card);
     padding-top: 6rem;
-    transform: translateX(100%);
-    transition: transform var(--transition);
+    
+    /* Overlay changes */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition), visibility var(--transition);
+    
     z-index: 50;
   }
   .main-nav.open {
-    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
   }
   .main-nav ul {
     flex-direction: column;

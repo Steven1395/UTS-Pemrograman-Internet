@@ -3,12 +3,25 @@ document.addEventListener("DOMContentLoaded", () => {
   // mobile nav toggle
   const navToggle = document.getElementById("nav-toggle");
   const mainNav = document.getElementById("main-nav");
+  
+  // Fungsi untuk menutup menu
+  function closeMobileNav() {
+    mainNav.classList.remove("open");
+    navToggle.classList.remove("open");
+  }
+
   navToggle &&
     navToggle.addEventListener("click", () => {
       mainNav.classList.toggle("open");
       navToggle.classList.toggle("open");
     });
-
+    
+  // TUTUP MENU SAAT LINK DIKLIK (Perbaikan baru)
+  const navLinks = mainNav ? mainNav.querySelectorAll('a[href^="#"]') : [];
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeMobileNav);
+  });
+  
   // set year
   document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -56,7 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (slides.length) {
     renderDots();
-    heroTimer = setInterval(next, 6000);
+    updateSlides();
+    resetTimer();
     nextBtn && nextBtn.addEventListener("click", next);
     prevBtn && prevBtn.addEventListener("click", prev);
   }
