@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pohon Hub — Pelestarian Lingkungan</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="img/favicon.png" type="image/png">   
 </head>
 <body>
     <header class="site-header">
         <div class="container header-inner">
             <div class="brand">
-                <a href="#" class="Pohon"><img src="img/logo.png" alt=""></a>
+                <a href="index.html"><img src="img/logo.png" alt="Pohon Hub Logo"></a>
             </div>
-
             <nav class="main-nav" id="main-nav">
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">Tentang Kami</a></li>
-                    <li><a href="#kontribusi">Kontribusi</a></li>
-                    <li><a href="#donasi">Daftar Sekarang</a></li>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">Tentang Kami</a></li>
+                    <li><a href="petisi.html">Petisi</a></li>
+                    <li><a href="relawan.html">Relawan</a></li>
+                    <li><a href="donasi.html" class="btn primary nav-btn">Donasi</a></li>
                 </ul>
             </nav>
-
             <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu">
                 <span class="bar"></span><span class="bar"></span><span class="bar"></span>
             </button>
@@ -30,38 +30,24 @@
 
     <section id="home" class="hero">
         <div class="hero-slider">
-            <div
-                class="slide active"
-                style="background-image: url('img/hero2.jpg')"
-            >
+            <div class="slide active" style="background-image: url('img/hero2.jpg')">
                 <div class="overlay"></div>
                 <div class="hero-content container">
                     <h1>Save Pohon Kita</h1>
-                    <p>
-                        Pohon Hub berdedikasi menjaga kelestarian lingkungan, memulihkan
-                        ruang hijau, dan mendukung komunitas lokal.
-                    </p>
+                    <p>Pohon Hub berdedikasi menjaga kelestarian lingkungan, memulihkan ruang hijau, dan mendukung komunitas lokal.</p>
                     <a class="btn primary" href="#kontribusi">Lindungi Sekarang</a>
                 </div>
             </div>
-
-            <div
-                class="slide"
-                style="background-image: url('img/hero.jpg')"
-            >
+            <div class="slide" style="background-image: url('img/hero.jpg')">
                 <div class="overlay"></div>
                 <div class="hero-content container">
                     <h1>Bersama Menanam Harapan</h1>
-                    <p>
-                        Gabung jadi relawan atau tanda tangan petisi untuk perubahan nyata
-                        di lingkungan kita.
-                    </p>
-                    <a class="btn primary" href="#about">Pelajari Lebih</a>
+                    <p>Gabung jadi relawan atau tanda tangan petisi untuk perubahan nyata di lingkungan kita.</p>
+                    <a class="btn primary" href="relawan.html">Gabung Relawan</a>
                 </div>
             </div>
-
-            <button class="slide-nav prev" aria-label="Sebelumnya">&lt;</button>
-            <button class="slide-nav next" aria-label="Selanjutnya">&gt;</button>
+            <button class="slide-nav prev" aria-label="Sebelumnya"><i data-feather="chevron-left"></i></button>
+            <button class="slide-nav next" aria-label="Selanjutnya"><i data-feather="chevron-right"></i></button>
             <div class="dots" id="hero-dots"></div>
         </div>
     </section>
@@ -71,25 +57,19 @@
             <div class="about-text">
                 <h2>Tentang Pohon Hub</h2>
                 <p>
-                    Pohon Hub telah berdiri sejak 1990 dengan misi menjaga dan
-                    merehabilitasi area hijau. Kami bekerja sama dengan komunitas,
-                    sekolah, dan pemangku kepentingan untuk program penanaman pohon,
-                    edukasi lingkungan, dan advokasi kebijakan hijau.
+                    Pohon Hub telah berdiri sejak 1990, berdedikasi penuh pada misi krusial: menjaga dan merehabilitasi area hijau yang terus terancam. 
+                    Kami aktif membangun jembatan kolaborasi dengan komunitas, sekolah, dan pemangku kepentingan untuk program penanaman pohon masif, 
+                    edukasi lingkungan, serta advokasi kebijakan hijau demi warisan ruang hijau yang sehat.
                 </p>
             </div>
-
             <div class="about-carousel">
                 <div class="carousel-track" id="about-track">
-                    <img src="img/kegiatan1.jpg" alt="Kegiatan 1" />
-                    <img src="img/kegiatan2.jpg" alt="Kegiatan 2" />
-                    <img src="img/kegiatan3.jpg" alt="Kegiatan 3" />
+                    <img src="img/kegiatan1.jpg" alt="Relawan menanam pohon bakau" />
+                    <img src="img/kegiatan2.jpg" alt="Edukasi lingkungan anak-anak" />
+                    <img src="img/kegiatan3.jpg" alt="Aksi pembersihan sampah plastik" />
                 </div>
-                <button class="about-prev" aria-label="Gambar sebelumnya">
-                    &lt;
-                </button>
-                <button class="about-next" aria-label="Gambar selanjutnya">
-                    &gt;
-                </button>
+                <button class="about-prev" aria-label="Gambar sebelumnya"><i data-feather="chevron-left"></i></button>
+                <button class="about-next" aria-label="Gambar selanjutnya"><i data-feather="chevron-right"></i></button>
             </div>
         </div>
     </section>
@@ -97,70 +77,47 @@
     <section id="kontribusi" class="kontribusi container">
         <h2>Kontribusi</h2>
         <p class="muted">Pilih cara ikut berkontribusi untuk lingkungan</p>
-
         <div class="grid contrib-grid">
             <article class="pill">
-                <div class="icon-circle">
-                    <img src="img/kontribusi1.png" alt="" />
-                </div>
+                <div class="icon-circle"><img src="img/kontribusi1.png" alt="Ikon Petisi"></div>
                 <h3>Tandatangani Petisi</h3>
                 <p>Berikan suara untuk kebijakan lingkungan yang pro-hutan.</p>
-                <a href="#" class="link">Mulai &rarr;</a>
+                <a href="petisi.html" class="link">Mulai &rarr;</a>
             </article>
-
             <article class="pill">
-                <div class="icon-circle">
-                    <img src="img/kontribusi2.png" alt="" />
-                </div>
+                <div class="icon-circle"><img src="img/kontribusi2.png" alt="Ikon Relawan"></div>
                 <h3>Menjadi Relawan</h3>
                 <p>Bergabung dalam aksi penanaman dan edukasi lapangan.</p>
-                <a href="#" class="link">Daftar &rarr;</a>
+                <a href="relawan.html" class="link">Daftar &rarr;</a>
             </article>
-
             <article class="pill">
-                <div class="icon-circle">
-                    <img src="img/kontribusi3.png" alt="" />
-                </div>
+                <div class="icon-circle"><img src="img/kontribusi3.png" alt="Ikon Donasi"></div>
                 <h3>Berdonasi</h3>
                 <p>Dukung program restorasi dan pengadaan bibit pohon.</p>
-                <a href="#donasi" class="link">Donasi &rarr;</a>
+                <a href="donasi.html" class="link">Donasi &rarr;</a>
             </article>
         </div>
     </section>
 
     <section id="donasi" class="signup container">
-        <h2>Bergabung untuk Update dan Kontribusi</h2>
-        <p class="muted">Dapatkan info terbaru seputar kampanye dan kegiatan.</p>
-
+        <h2>Bergabung untuk Update</h2>
+        <p class="muted">Dapatkan info terbaru seputar kampanye dan kegiatan kami.</p>
         <form id="signup-form" class="form-grid" novalidate>
             <label>
                 <span>Email*</span>
-                <input
-                    type="email"
-                    name="email"
-                    required
-                    placeholder="you@example.com"
-                />
+                <input type="email" name="email" required placeholder="you@example.com" />
             </label>
-
             <label>
                 <span>Nama Depan</span>
                 <input type="text" name="first" placeholder="Budi" />
             </label>
-
             <label>
                 <span>Nama Belakang</span>
                 <input type="text" name="last" placeholder="Santoso" />
             </label>
-
             <div class="form-actions">
                 <button type="submit" class="btn primary">Bergabung Sekarang</button>
             </div>
-
-            <p class="privacy">
-                Pohon Hub akan menggunakan kontak untuk menginformasikan kegiatan.
-                Kamu bisa berhenti kapan pun.
-            </p>
         </form>
     </section>
 
@@ -168,9 +125,7 @@
         <div class="container footer-inner">
             <div class="footer-left">
                 <p><strong>Pohon Hub</strong></p>
-                <p class="muted">
-                    © <span id="year"></span> Pohon Hub. Semua hak dilindungi.
-                </p>
+                <p class="muted">© <span id="year"></span> Pohon Hub. Semua hak dilindungi.</p>
             </div>
             <div class="footer-right">
                 <div class="socials">
@@ -182,10 +137,16 @@
         </div>
     </footer>
 
+    <div id="lightbox-modal" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-image" src="" alt="Gambar Besar Kegiatan">
+        </div>
+    </div>
+
     <script src="https://unpkg.com/feather-icons"></script> 
     <script src="js/script.js"></script>
     <script>
-        // Panggil feather.replace() setelah semua konten dimuat
         feather.replace();
     </script>
 </body>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Berdonasi — Pohon Hub</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="img/favicon.png" type="image/png">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">
+                <a href="index.html"><img src="img/logo.png" alt="Pohon Hub Logo"></a>
+            </div>
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">Tentang Kami</a></li>
+                    <li><a href="petisi.html">Petisi</a></li>
+                    <li><a href="relawan.html">Relawan</a></li>
+                    <li><a href="donasi.html" class="btn primary nav-btn">Donasi</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="page-hero" style="background-image: url('img/donasi-hero.jpg');">
+        <div class="overlay"></div>
+        <div class="hero-content container">
+            <h1>Dukung Aksi Kami</h1>
+            <p>Setiap donasi Anda akan diubah menjadi bibit pohon baru dan mendukung program restorasi kami.</p>
+        </div>
+    </section>
+
+    <section id="donasi-content" class="donasi-page-section container">
+        <div class="donasi-header">
+            <h2>Pilih Metode Donasi Anda</h2>
+            <p class="muted">Donasi Anda 100% akan digunakan untuk program penanaman dan perawatan pohon.</p>
+        </div>
+
+        <div class="donasi-grid">
+            <article class="donasi-card pill">
+                <h3><i data-feather="credit-card"></i> Transfer Bank</h3>
+                <p>Kirimkan donasi Anda ke salah satu rekening resmi kami di bawah ini:</p>
+                <ul class="bank-list">
+                    <li><strong>Bank Central Asia (BCA)</strong><br>123-456-7890 (a/n Yayasan Pohon Hub)</li>
+                    <li><strong>Bank Mandiri</strong><br>098-765-4321 (a/n Yayasan Pohon Hub)</li>
+                </ul>
+            </article>
+
+            <article class="donasi-card pill">
+                <h3><i data-feather="smartphone"></i> E-Wallet (QRIS)</h3>
+                <p>Scan kode QRIS di bawah ini menggunakan aplikasi E-Wallet (GoPay, OVO, DANA, ShopeePay, dll).</p>
+                <img src="img/qris-donasi.png" alt="QRIS Donasi Pohon Hub" class="qris-image">
+            </article>
+        </div>
+
+        <div class="donasi-konfirmasi">
+            <h4>Sudah Berdonasi?</h4>
+            <p>Untuk membantu kami melacak donasi Anda, mohon kirimkan bukti transfer ke email kami di <a href="mailto:donasi@pohonhub.org">donasi@pohonhub.org</a>. Terima kasih atas dukungan Anda!</p>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <p><strong>Pohon Hub</strong></p>
+                <p class="muted">© <span id="year"></span> Pohon Hub. Semua hak dilindungi.</p>
+            </div>
+            <div class="footer-right">
+                <div class="socials">
+                    <a href="#" aria-label="Instagram"><i data-feather="instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i data-feather="twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i data-feather="youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/feather-icons"></script> 
+    <script src="js/page-script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

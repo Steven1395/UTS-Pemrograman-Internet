@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jadi Relawan — Pohon Hub</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="img/favicon.png" type="image/png">
+</head>
+<body>  
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">
+                <a href="index.html"><img src="img/logo.png" alt="Pohon Hub Logo"></a>
+            </div>
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">Tentang Kami</a></li>
+                    <li><a href="petisi.html">Petisi</a></li>
+                    <li><a href="relawan.html">Relawan</a></li>
+                    <li><a href="donasi.html" class="btn primary nav-btn">Donasi</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="page-hero" style="background-image: url('img/relawan-hero.jpg');">
+        <div class="overlay"></div>
+        <div class="hero-content container">
+            <h1>Gabung Aksi Nyata</h1>
+            <p>Jadilah bagian dari perubahan. Daftarkan dirimu sebagai relawan Pohon Hub.</p>
+        </div>
+    </section>
+
+    <section id="relawan-form" class="signup container">
+        <h2>Formulir Pendaftaran Relawan</h2>
+        <p class="muted">Isi data di bawah ini dan tim kami akan segera menghubungi Anda.</p>
+
+        <form id="relawan-signup-form" class="form-grid relawan-form" novalidate>
+            <label>
+                <span>Nama Depan*</span>
+                <input type="text" name="first" placeholder="Budi" required />
+            </label>
+            <label>
+                <span>Nama Belakang</span>
+                <input type="text" name="last" placeholder="Santoso" />
+            </label>
+            <label>
+                <span>Email*</span>
+                <input type="email" name="email" required placeholder="you@example.com"/>
+            </label>
+            <label>
+                <span>Nomor Telepon*</span>
+                <input type="tel" name="phone" placeholder="0812..." required />
+            </label>
+            <label>
+                <span>Kota Domisili*</span>
+                <input type="text" name="city" placeholder="Jakarta" required />
+            </label>
+            <label>
+                <span>Pekerjaan/Profesi</span>
+                <input type="text" name="occupation" placeholder="Mahasiswa" />
+            </label>
+            
+            <label class="full-width">
+                <span>Alasan Bergabung (Singkat)*</span>
+                <textarea name="reason" rows="4" placeholder="Saya ingin berkontribusi langsung dalam aksi penanaman pohon..." required></textarea>
+            </label>
+
+            <div class="form-actions full-width">
+                <button type="submit" class="btn primary">Kirim Pendaftaran</button>
+            </div>
+        </form>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <p><strong>Pohon Hub</strong></p>
+                <p class="muted">© <span id="year"></span> Pohon Hub. Semua hak dilindungi.</p>
+            </div>
+            <div class="footer-right">
+                <div class="socials">
+                    <a href="#" aria-label="Instagram"><i data-feather="instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i data-feather="twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i data-feather="youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/feather-icons"></script> 
+    <script src="js/page-script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
