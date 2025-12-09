@@ -250,7 +250,7 @@ body {
     align-items: flex-start;
     flex-wrap: wrap;
 }
-.about-text { flex: 1 1 450px; }
+.about-text { flex: 1 1 300px; }
 .about-text h2 {
     font-size: 1.9rem;
     margin-bottom: 0.5rem;
@@ -258,7 +258,7 @@ body {
 }
 .about-text p { color: var(--muted); }
 .about-carousel {
-    flex: 1 1 400px;
+    flex: 1 1 200px;
     position: relative;
 }
 .carousel-track {
@@ -735,3 +735,96 @@ body {
 
 /* small nice touches */
 .muted { color: var(--muted); }
+
+/* --- AUTHENTICATION (LOGIN/REGISTER) STYLES --- */
+.auth-header {
+    padding: 1.5rem 0;
+}
+.auth-brand {
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.auth-brand img {
+    height: 40px;
+}
+.auth-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: url('../img/hero2.jpg') no-repeat center center/cover;
+    position: relative;
+}
+.auth-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(9, 24, 12, 0.6);
+}
+.auth-card {
+    background: #fff;
+    width: 100%;
+    max-width: 450px;
+    padding: 2.5rem;
+    border-radius: 16px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+.auth-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #eee;
+}
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: 0.3s;
+}
+.tab-btn.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+}
+.auth-form {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+.auth-form.active {
+    display: block;
+}
+.auth-form h2 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+.auth-form .muted {
+    margin-bottom: 1.5rem;
+    display: block;
+}
+.auth-form label {
+    margin-bottom: 1rem;
+    display: block;
+}
+.full-btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+/* Style Khusus Halaman Admin */
+.admin-bg { background: #111; }
+.admin-card { border-top: 5px solid var(--accent); }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
