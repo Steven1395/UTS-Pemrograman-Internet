@@ -828,3 +828,81 @@ body {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- PERBAIKAN TAMPILAN FORM LOGIN/REGISTER --- */
+
+/* 1. Memberi jarak antara tulisan "Email" dengan kotak ketiknya */
+.auth-form label span {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+/* 2. Mempercantik Kotak Input */
+.auth-form input {
+    width: 100%;               /* Supaya lebar memenuhi kartu */
+    padding: 12px 16px;        /* Memberi ruang napas di dalam kotak */
+    border: 1px solid #d1d5db; /* Garis pinggir abu-abu halus */
+    border-radius: 8px;        /* Sudut melengkung */
+    font-size: 1rem;           /* Ukuran huruf lebih jelas */
+    background-color: #f9fafb; /* Warna latar sedikit abu-abu */
+    transition: all 0.3s ease; /* Efek halus saat diklik */
+    box-sizing: border-box;    /* Penting agar padding tidak merusak lebar */
+    margin-bottom: 5px;        /* Jarak aman ke bawah */
+}
+
+/* 3. Efek saat kotak diklik (Focus) */
+.auth-form input:focus {
+    outline: none;
+    background-color: #ffffff;
+    border-color: var(--green); /* Warna hijau logo */
+    box-shadow: 0 0 0 3px rgba(44, 138, 62, 0.15); /* Efek glow hijau tipis */
+}
+
+/* 4. Memastikan tombol "Masuk Sekarang" punya jarak cukup dari input */
+.auth-form .btn {
+    margin-top: 1.5rem;
+}
+
+/* --- STYLE USER PROFILE DI NAVIGASI --- */
+
+/* Tombol Masuk (Sign In) - Putih garis hijau */
+.btn-login-nav {
+    text-decoration: none;
+    color: var(--green);
+    border: 2px solid var(--green);
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-login-nav:hover {
+    background: var(--green);
+    color: #fff;
+}
+
+/* Foto Profil Bulat */
+.nav-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Membuat jadi bulat */
+    object-fit: cover;  /* Agar gambar tidak gepeng */
+    border: 2px solid #ddd;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: transform 0.2s;
+}
+
+.nav-profile-img:hover {
+    transform: scale(1.1);
+    border-color: var(--green);
+}
+
+/* Container agar sejajar */
+#nav-auth-item {
+    display: flex;
+    align-items: center;
+}
