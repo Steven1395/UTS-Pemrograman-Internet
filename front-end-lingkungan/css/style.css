@@ -169,6 +169,12 @@ body {
     box-shadow: 0 6px 20px rgba(247, 201, 72, 0.18);
 }
 
+.btn.primary:hover {
+    background: #ffdb6c; 
+    color: #111;
+    box-shadow: 0 8px 25px rgba(247, 201, 72, 0.3); /* Shadow sedikit lebih besar */
+}
+
 /* hero controls */
 .slide-nav {
     position: absolute;
@@ -388,6 +394,7 @@ body {
     margin-top: 0.5rem;
 }
 /* Style khusus form relawan */
+
 .relawan-form {
     grid-template-columns: repeat(2, 1fr);
 }
@@ -881,7 +888,7 @@ body {
 
 .btn-login-nav:hover {
     background: var(--green);
-    color: #fff;
+    color: #f7c948;
 }
 
 /* Foto Profil Bulat */

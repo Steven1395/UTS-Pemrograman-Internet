@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title id="page-title">Detail Petisi</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/petisi.css" />
+    <link rel="icon" href="img/favicon.png" type="image/png">
+</head>
+<body>
+    <header class="site-header"></header>
+
+    <section class="detail-hero" style="padding-top: 5rem; padding-bottom: 2rem;">
+        <div class="container">
+            <a href="petisi.html" style="color:var(--green); font-weight:600; text-decoration:none;">&larr; Kembali ke Daftar Petisi</a>
+        </div>
+    </section>
+
+    <section id="petisi-detail-content" class="container" style="display: flex; gap: 40px; margin-bottom: 4rem;">
+        
+        <div id="detail-kiri" style="flex: 2; min-width: 400px;">
+            <img id="detail-gambar" src="" alt="Gambar Petisi" style="width: 100%; height: 350px; object-fit: cover; border-radius: var(--radius); margin-bottom: 20px;">
+            <h1 id="detail-judul" style="font-size: 2.2rem; font-weight: var(--fw-heading); margin-bottom: 15px;">Judul Petisi Dimuat...</h1>
+            <p id="detail-deskripsi" style="color: #444; line-height: 1.7;">Deskripsi lengkap akan dimuat di sini...</p>
+        </div>
+
+        <div id="detail-kanan" style="flex: 1; min-width: 250px;">
+            <div style="background: var(--card); padding: 25px; border-radius: var(--radius); box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: sticky; top: 100px;">
+                <h3 style="margin-bottom: 15px;">Dukungan</h3>
+                
+                <div id="detail-progress-bar" style="background:#eee; height:10px; border-radius:5px; margin-bottom:10px; overflow:hidden;">
+                    <div id="detail-progress-fill" style="background:var(--green); width:0%; height:100%;"></div>
+                </div>
+
+                <p style="font-size: 1.1rem; font-weight: bold; margin-bottom: 10px;">
+                    <span id="detail-ttd">0</span> dari <span id="detail-target">0</span>
+                </p>
+
+                <button id="btn-dukung-final" class="btn primary full-btn" style="width:100%; padding: 12px;">Tandatangani Petisi Ini</button>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="site-footer">...</footer>
+
+    <script src="https://unpkg.com/feather-icons"></script> 
+    <script src="js/script.js"></script>
+    <script src="js/petisi-detail.js"></script> <script> feather.replace(); </script>
+</body>
+</html>

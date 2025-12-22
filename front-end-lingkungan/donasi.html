@@ -62,9 +62,37 @@
             </article>
         </div>
 
-        <div class="donasi-konfirmasi">
-            <h4>Sudah Berdonasi?</h4>
-            <p>Untuk membantu kami melacak donasi Anda, mohon kirimkan bukti transfer ke email kami di <a href="mailto:donasi@pohonhub.org">donasi@pohonhub.org</a>. Terima kasih atas dukungan Anda!</p>
+        <div class="donasi-konfirmasi" style="max-width: 600px; margin: 50px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div style="text-align:center; margin-bottom: 20px;">
+                <h3 style="color:var(--green);">Konfirmasi Donasi</h3>
+                <p class="muted">Sudah transfer? Upload buktinya di sini agar tercatat di sistem.</p>
+            </div>
+
+            <form id="donasi-konfirmasi-form" enctype="multipart/form-data">
+                
+                <label style="display:block; margin-bottom:15px;">
+                    <span style="font-weight:600; display:block; margin-bottom:5px;">Nama Donatur</span>
+                    <input type="text" name="nama" placeholder="Nama Anda / Hamba Allah" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;">
+                </label>
+
+                <label style="display:block; margin-bottom:15px;">
+                    <span style="font-weight:600; display:block; margin-bottom:5px;">Email Aktif</span>
+                    <input type="email" name="email" placeholder="email@contoh.com" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;">
+                </label>
+
+                <label style="display:block; margin-bottom:15px;">
+                    <span style="font-weight:600; display:block; margin-bottom:5px;">Jumlah Donasi (Rp)</span>
+                    <input type="number" name="jumlah" placeholder="Contoh: 50000" min="10000" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;">
+                </label>
+
+                <label style="display:block; margin-bottom:25px;">
+                    <span style="font-weight:600; display:block; margin-bottom:5px;">Bukti Transfer (JPG/PNG)</span>
+                    <input type="file" name="bukti" accept=".jpg, .jpeg, .png" required style="width:100%; padding:5px;">
+                    <small style="color:red; font-size:0.8rem;">*Wajib upload gambar bukti transfer</small>
+                </label>
+
+                <button type="submit" class="btn primary full-btn" style="width:100%;">Kirim Konfirmasi</button>
+            </form>
         </div>
     </section>
 
@@ -85,7 +113,7 @@
     </footer>
 
     <script src="https://unpkg.com/feather-icons"></script> 
-    <script src="js/page-script.js"></script>
+    <script src="js/script.js"></script>
     <script>
         feather.replace();
     </script>

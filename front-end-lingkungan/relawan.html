@@ -6,6 +6,17 @@
     <title>Jadi Relawan — Pohon Hub</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" href="img/favicon.png" type="image/png">
+    
+    <script>
+        // Cek LocalStorage dengan kunci yang BENAR ('userName')
+        const siapaIni = localStorage.getItem("userName");
+        
+        // Kalau kosong (belum login), tendang!
+        if (!siapaIni) {
+            alert("🔒 Akses Terbatas!\nSilakan Login terlebih dahulu untuk mendaftar sebagai Relawan.");
+            window.location.href = "login.html";
+        }
+    </script>
 </head>
 <body>  
     <header class="site-header">
@@ -18,10 +29,10 @@
                     <li><a href="index.html#home">Home</a></li>
                     <li><a href="index.html#about">Tentang Kami</a></li>
                     <li><a href="petisi.html">Petisi</a></li>
-                    <li><a href="relawan.html">Relawan</a></li>
-    
-                    <li id="nav-auth-item">
+                    <li><a href="relawan.html" class="active">Relawan</a></li> <li id="nav-auth-item">
+                        <a href="login.html" class="btn-login-nav">Masuk</a>
                     </li>
+                    
                     <li><a href="donasi.html" class="btn primary nav-btn">Donasi</a></li>
                 </ul>
             </nav>
@@ -34,44 +45,48 @@
     <section class="page-hero" style="background-image: url('img/relawan-hero.jpg');">
         <div class="overlay"></div>
         <div class="hero-content container">
-            <h1>Gabung Aksi Nyata</h1>
-            <p>Jadilah bagian dari perubahan. Daftarkan dirimu sebagai relawan Pohon Hub.</p>
+            <h1>Gabung Jadi Relawan</h1>
+            <p>Mari turun tangan langsung menanam kebaikan untuk bumi.</p>
         </div>
     </section>
 
-    <section id="relawan-form" class="signup container">
-        <h2>Formulir Pendaftaran Relawan</h2>
-        <p class="muted">Isi data di bawah ini dan tim kami akan segera menghubungi Anda.</p>
+    <section class="relawan-form-section container">
+        <div class="section-header">
+            <h2>Formulir Pendaftaran</h2>
+            <p class="muted">Isi data diri Anda untuk bergabung dalam kegiatan lapangan kami selanjutnya.</p>
+        </div>
 
-        <form id="relawan-signup-form" class="form-grid relawan-form" novalidate>
-            <label>
-                <span>Nama Depan*</span>
-                <input type="text" name="first" placeholder="Budi" required />
-            </label>
-            <label>
-                <span>Nama Belakang</span>
-                <input type="text" name="last" placeholder="Santoso" />
-            </label>
-            <label>
-                <span>Email*</span>
-                <input type="email" name="email" required placeholder="you@example.com"/>
-            </label>
-            <label>
-                <span>Nomor Telepon*</span>
-                <input type="tel" name="phone" placeholder="0812..." required />
-            </label>
-            <label>
-                <span>Kota Domisili*</span>
-                <input type="text" name="city" placeholder="Jakarta" required />
-            </label>
-            <label>
-                <span>Pekerjaan/Profesi</span>
-                <input type="text" name="occupation" placeholder="Mahasiswa" />
-            </label>
+        <form id="relawan-signup-form" class="signup-form">
+            <div class="form-grid">
+                <label>
+                    <span>Nama Lengkap*</span>
+                    <input type="text" name="nama_lengkap" placeholder="Sesuai KTP" required />
+                </label>
+                <label>
+                    <span>Email Aktif*</span>
+                    <input type="email" name="email" placeholder="email@anda.com" required />
+                </label>
+            </div>
+            
+            <div class="form-grid">
+                <label>
+                    <span>No. WhatsApp / HP*</span>
+                    <input type="text" name="no_hp" placeholder="0812..." required />
+                </label>
+                <label>
+                    <span>Pekerjaan / Profesi</span>
+                    <input type="text" name="pekerjaan" placeholder="Mahasiswa / Karyawan" />
+                </label>
+            </div>
             
             <label class="full-width">
-                <span>Alasan Bergabung (Singkat)*</span>
-                <textarea name="reason" rows="4" placeholder="Saya ingin berkontribusi langsung dalam aksi penanaman pohon..." required></textarea>
+                <span>Domisili (Kota)*</span>
+                <input type="text" name="domisili" placeholder="Contoh: Jakarta Selatan" required />
+            </label>
+
+            <label class="full-width">
+                <span>Alasan Bergabung / Keahlian Khusus</span>
+                <textarea name="alasan" rows="4" placeholder="Ceritakan sedikit kenapa ingin bergabung..." required></textarea>
             </label>
 
             <div class="form-actions full-width">
@@ -97,7 +112,7 @@
     </footer>
 
     <script src="https://unpkg.com/feather-icons"></script> 
-    <script src="js/page-script.js"></script>
+    <script src="js/script.js"></script>
     <script>
         feather.replace();
     </script>
