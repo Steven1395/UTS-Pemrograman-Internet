@@ -1,36 +1,22 @@
-// File: js/auth.js (VERSI FINAL - FIX TOMBOL & SINKRON KEY)
-
 document.addEventListener("DOMContentLoaded", () => {
-    
-    // --- 1. DEFINISI ELEMEN ---
     const tabLogin = document.getElementById("tab-login");
     const tabRegister = document.getElementById("tab-register");
     const formLogin = document.getElementById("form-login");
     const formRegister = document.getElementById("form-register");
 
-    // --- 2. LOGIKA PINDAH TAB (MASUK <-> DAFTAR) ---
-    if (tabLogin && tabRegister && formLogin && formRegister) {
-        
+    // 1. PINDAH TAB
+    if (tabLogin && tabRegister) {
         tabLogin.addEventListener("click", () => {
-            tabLogin.classList.add("active");
-            tabRegister.classList.remove("active");
-            formLogin.classList.add("active");  // Tampilkan form login
-            formRegister.classList.remove("active"); // Sembunyikan form register
-            formLogin.style.display = "block";    // Pastikan display block
-            formRegister.style.display = "none";
+            tabLogin.classList.add("active"); tabRegister.classList.remove("active");
+            formLogin.style.display = "block"; formRegister.style.display = "none";
         });
-
         tabRegister.addEventListener("click", () => {
-            tabRegister.classList.add("active");
-            tabLogin.classList.remove("active");
-            formRegister.classList.add("active"); // Tampilkan form register
-            formLogin.classList.remove("active"); // Sembunyikan form login
-            formRegister.style.display = "block"; 
-            formLogin.style.display = "none";
+            tabRegister.classList.add("active"); tabLogin.classList.remove("active");
+            formRegister.style.display = "block"; formLogin.style.display = "none";
         });
     }
 
-    // --- 3. FUNGSI KIRIM DATA KE PHP (FETCH) ---
+    // 2. FUNGSI KIRIM DATA (FETCH JSON)
     async function postData(url, data) {
         try {
             const response = await fetch(url, {
@@ -38,102 +24,64 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
-            return await response.json(); 
+            
+            const text = await response.text(); 
+            try {
+                return JSON.parse(text); 
+            } catch (e) {
+                console.error("Format Response Bukan JSON:", text);
+                return { status: 'error', message: 'Format response server rusak.' };
+            }
         } catch (error) {
-            console.error('Fetch Error:', error);
-            alert("⚠️ Gagal terhubung ke server database. Cek XAMPP!");
-            return { status: 'error', message: 'Koneksi gagal.' };
+            return { status: 'error', message: 'Gagal terhubung ke database. Cek XAMPP!' };
         }
     }
 
-    // --- 4. HANDLE LOGIN (SAAT TOMBOL DITEKAN) ---
+    // 3. LOGIN
     if (formLogin) {
         formLogin.addEventListener("submit", async (e) => {
-            e.preventDefault(); // Mencegah reload halaman
-            
-            const emailVal = document.getElementById("login-email").value;
-            const passVal = document.getElementById("login-password").value;
+            e.preventDefault();
             const btn = formLogin.querySelector("button");
-            
-            // Efek Loading
-            const originalText = btn.textContent;
-            btn.textContent = "Memproses...";
-            btn.disabled = true;
+            btn.textContent = "Memproses..."; btn.disabled = true;
 
             const result = await postData('php/auth.php', {
                 action: 'login',
-                role: 'user', // Default login sebagai user
-                email: emailVal,
-                password: passVal
+                email: document.getElementById("login-email").value,
+                password: document.getElementById("login-password").value,
+                role: 'user'
             });
-            
-            btn.textContent = originalText;
-            btn.disabled = false;
+
+            btn.textContent = "Masuk Sekarang"; btn.disabled = false;
 
             if (result.status === 'success') {
-                // [PENTING] SIMPAN SESI DENGAN KUNCI YANG BENAR (userName)
+                // --- BAGIAN YANG DIPERBAIKI ---
+                localStorage.setItem("userId", result.data.id);   // <--- SIMPAN ID USER (WAJIB!)
                 localStorage.setItem("userRole", result.data.role);
                 localStorage.setItem("userName", result.data.nama);
+                // ------------------------------
 
                 alert(`Login Berhasil! Halo, ${result.data.nama}`);
-                
-                // Cek Role untuk Redirect
-                if (result.data.role === 'admin') {
-                    // Admin harus login lewat admin-gate.html sebenarnya, 
-                    // tapi kalau login lewat sini tetap kita arahkan ke dashboard
-                    window.location.href = "admin-panel.html"; 
-                } else {
-                    window.location.href = "index.html"; 
-                }
+                window.location.href = result.data.role === 'admin' ? "admin-panel.html" : "index.html";
             } else {
                 alert(result.message);
             }
         });
     }
 
-    // --- 5. HANDLE REGISTER ---
+    // 4. REGISTER
     if (formRegister) {
         formRegister.addEventListener("submit", async (e) => {
             e.preventDefault();
-
-            const namaVal = document.getElementById("reg-name").value;
-            const emailVal = document.getElementById("reg-email").value;
-            const passVal = document.getElementById("reg-password").value;
-            
             const result = await postData('php/auth.php', {
                 action: 'register',
-                nama: namaVal,
-                email: emailVal,
-                password: passVal
+                nama: document.getElementById("reg-name").value,
+                email: document.getElementById("reg-email").value,
+                password: document.getElementById("reg-password").value
             });
 
             if (result.status === 'success') {
                 alert(result.message);
-                // Pindah otomatis ke tab login
-                tabLogin.click(); 
-            } else {
-                alert(result.message);
-            }
-        });
-    }
-    
-    // --- 6. HANDLE LOGIN ADMIN (KHUSUS HALAMAN ADMIN-GATE.HTML) ---
-    const formAdmin = document.getElementById("form-admin-login");
-    if (formAdmin) {
-        formAdmin.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            
-            const result = await postData('php/auth.php', {
-                action: 'login',
-                role: 'admin',
-                email: document.getElementById("admin-email").value,
-                password: document.getElementById("admin-password").value
-            });
-
-            if (result.status === 'success') {
-                localStorage.setItem("userRole", result.data.role);
-                localStorage.setItem("userName", result.data.nama);
-                window.location.href = "admin-panel.html";
+                tabLogin.click();
             } else {
                 alert(result.message);
             }

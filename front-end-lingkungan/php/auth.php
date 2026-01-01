@@ -1,78 +1,90 @@
-    <?php
-    header('Content-Type: application/json');
-    header('Access-Control-Allow-Origin: *');
+<?php
+// 1. Matikan semua warning agar tidak merusak format JSON
+error_reporting(0);
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
 
-    // KONFIGURASI DATABASE
-    $host = 'localhost';
-    $user = 'root';      // User default XAMPP
-    $pass = '';          // Password default XAMPP (biasanya kosong)
-    $db   = 'pohonhub_db';
+// 2. Gunakan Output Buffering untuk menangkap "sampah" teks yang tidak sengaja keluar
+ob_start();
 
-    $conn = new mysqli($host, $user, $pass, $db); ;;;
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$db   = 'pohonhub_db';
 
-    if ($conn->connect_error) {
-        die(json_encode(["status" => "error", "message" => "Koneksi Database Gagal: " . $conn->connect_error]));
-    }
+$conn = new mysqli($host, $user, $pass, $db);
 
-    // AMBIL DATA DARI JAVASCRIPT
-    $data = json_decode(file_get_contents("php://input"), true);
-    $action = isset($data['action']) ? $data['action'] : '';
+if ($conn->connect_error) {
+    ob_clean();
+    echo json_encode(["status" => "error", "message" => "Koneksi Database Gagal"]);
+    exit;
+}
 
-    // --- LOGIC REGISTER ---
-    if ($action == 'register') {
-        $nama = $conn->real_escape_string($data['nama']);
-        $email = $conn->real_escape_string($data['email']);
-        $password = $conn->real_escape_string($data['password']); // Idealnya di-hash, tapi kita plain dulu utk belajar
+// 3. Ambil data JSON dari JavaScript
+$input = file_get_contents("php://input");
+$data = json_decode($input, true);
+$action = isset($data['action']) ? $data['action'] : '';
 
-        // Cek apakah email sudah ada
-        $check = $conn->query("SELECT id FROM users WHERE email = '$email'");
-        if ($check->num_rows > 0) {
-            echo json_encode(["status" => "error", "message" => "Email ini sudah terdaftar!"]);
+// --- LOGIC REGISTER ---
+if ($action == 'register') {
+    $nama = $conn->real_escape_string($data['nama']);
+    $email = $conn->real_escape_string($data['email']);
+    $password = $conn->real_escape_string($data['password']);
+
+    $check = $conn->query("SELECT id FROM users WHERE email = '$email'");
+    if ($check->num_rows > 0) {
+        ob_clean();
+        echo json_encode(["status" => "error", "message" => "Email ini sudah terdaftar!"]);
+    } else {
+        $sql = "INSERT INTO users (nama, email, password, ROLE) VALUES ('$nama', '$email', '$password', 'user')";
+        if ($conn->query($sql)) {
+            ob_clean();
+            echo json_encode(["status" => "success", "message" => "Pendaftaran berhasil!"]);
         } else {
-            // Masukkan data baru sebagai 'user'
-            $sql = "INSERT INTO users (nama, email, password, role) VALUES ('$nama', '$email', '$password', 'user')";
-            if ($conn->query($sql)) {
-                echo json_encode(["status" => "success", "message" => "Pendaftaran berhasil! Silakan login."]);
-            } else {
-                echo json_encode(["status" => "error", "message" => "Gagal mendaftar: " . $conn->error]);
-            }
+            ob_clean();
+            echo json_encode(["status" => "error", "message" => "Gagal mendaftar: " . $conn->error]);
         }
     }
+}
 
-    // --- LOGIC LOGIN ---
-    elseif ($action == 'login') {
-        $email = $conn->real_escape_string($data['email']);
-        $password = $conn->real_escape_string($data['password']);
-        $requestRole = $conn->real_escape_string($data['role']); // 'user' atau 'admin'
+// --- LOGIC LOGIN ---
+elseif ($action == 'login') {
+    $email = $conn->real_escape_string($data['email']);
+    $password = $conn->real_escape_string($data['password']);
+    $requestRole = isset($data['role']) ? $conn->real_escape_string($data['role']) : 'user';
 
-        $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
-        $result = $conn->query($sql);
+    // Ambil semua kolom agar tidak ada yang terlewat
+    $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password' LIMIT 1";
+    $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            
-            // Cek Hak Akses (User tidak boleh login di Admin Panel)
-            if ($requestRole == 'admin' && $row['role'] != 'admin') {
-                echo json_encode(["status" => "error", "message" => "Akses Ditolak! Anda bukan Admin."]);
-            } else {
-                // Login Berhasil
-                echo json_encode([
-                    "status" => "success",
-                    "data" => [
-                        "id" => $row['id'],
-                        "nama" => $row['nama'],
-                        "email" => $row['email'],
-                        "role" => $row['role']
-                    ]
-                ]);
-            }
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        // FIX: Cek apakah kolomnya 'ROLE' (Caps) atau 'role' (Kecil)
+        $dbRole = isset($row['ROLE']) ? $row['ROLE'] : (isset($row['role']) ? $row['role'] : 'user');
+
+        // Proteksi Admin Gate
+        if ($requestRole == 'admin' && $dbRole != 'admin') {
+            ob_clean();
+            echo json_encode(["status" => "error", "message" => "Akses Ditolak! Anda bukan Admin."]);
         } else {
-            echo json_encode(["status" => "error", "message" => "Email atau Password salah!"]);
+            ob_clean();
+            echo json_encode([
+                "status" => "success",
+                "data" => [
+                    "id" => $row['id'],
+                    "nama" => $row['nama'],
+                    "role" => $dbRole
+                ]
+            ]);
         }
-    } 
-    else {
-        echo json_encode(["status" => "error", "message" => "Aksi tidak valid"]);
+    } else {
+        ob_clean();
+        echo json_encode(["status" => "error", "message" => "Email atau Password salah!"]);
     }
+}
 
-    $conn->close();
-    ?>
+$conn->close();
+// Buang semua teks sampah dan kirim JSON bersih
+ob_end_flush();
+?>

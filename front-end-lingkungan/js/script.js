@@ -243,25 +243,26 @@ document.addEventListener("DOMContentLoaded", () => {
        sekarang mengarah ke halaman detail. Fungsi dukung akan berada di js/petisi-detail.js */
 
 
-    /* --- 4. FITUR DONASI --- */
+    /* --- 4. FITUR DONASI (VERSI FIX - KIRIM USER ID) --- */
     const formDonasi = document.getElementById("donasi-konfirmasi-form");
     if (formDonasi) {
         formDonasi.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const sessionName = localStorage.getItem("userName");
-            if (!sessionName) {
+            
+            // AMBIL ID DARI LOCAL STORAGE
+            const myId = localStorage.getItem("userId"); 
+            if (!myId) {
                 alert("🔒 Silakan LOGIN dulu untuk konfirmasi donasi.");
                 window.location.href = "login.html";
                 return;
             }
 
             const btn = formDonasi.querySelector("button[type='submit']");
-            const txt = btn.textContent;
-            btn.textContent = "Mengirim...";
-            btn.disabled = true;
+            btn.disabled = true; btn.textContent = "Mengirim...";
 
             const formData = new FormData(formDonasi);
             formData.append('action', 'create');
+            formData.append('user_id', myId); // <--- INI WAJIB KIRIM
 
             try {
                 const res = await fetch('php/api_donasi.php', { method: 'POST', body: formData });
@@ -273,15 +274,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert("Gagal: " + result.message);
                 }
             } catch (error) {
-                console.error(error);
                 alert("Kesalahan koneksi.");
             } finally {
-                btn.textContent = txt;
-                btn.disabled = false;
+                btn.disabled = false; btn.textContent = "Konfirmasi Donasi";
             }
         });
     }
-
+    
     /* SCROLL REVEAL (PILL) */
     const observer = new IntersectionObserver(
         (entries) => {
@@ -295,11 +294,21 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(el);
     });
 
-    /* --- 5. FITUR RELAWAN --- */
+/* --- 5. FITUR RELAWAN (VERSI FIX - KIRIM USER ID) --- */
     const formRelawan = document.getElementById("relawan-signup-form");
     if (formRelawan) {
         formRelawan.addEventListener("submit", async (e) => {
             e.preventDefault();
+
+            // 1. AMBIL ID DARI LOCAL STORAGE (WAJIB LOGIN)
+            const currentUserId = localStorage.getItem("userId"); 
+
+            if (!currentUserId || currentUserId === "undefined") {
+                alert("🔒 Akses Ditolak! Anda harus LOGIN terlebih dahulu untuk mendaftar relawan.");
+                window.location.href = "login.html";
+                return;
+            }
+
             const btn = formRelawan.querySelector("button[type='submit']");
             const txt = btn.textContent;
             btn.textContent = "Mendaftar...";
@@ -307,10 +316,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const formData = new FormData(formRelawan);
             formData.append('action', 'create');
+            // --- INI KUNCINYA: Masukkan ID User ke data yang dikirim ---
+            formData.append('user_id', currentUserId); 
 
             try {
                 const res = await fetch('php/api_relawan.php', { method: 'POST', body: formData });
                 const result = await res.json();
+                
                 if (result.status === 'success') {
                     alert(result.message);
                     formRelawan.reset();
@@ -319,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             } catch (error) {
                 console.error(error);
-                alert("Kesalahan koneksi.");
+                alert("Kesalahan koneksi. Pastikan Apache & MySQL nyala.");
             } finally {
                 btn.textContent = txt;
                 btn.disabled = false;

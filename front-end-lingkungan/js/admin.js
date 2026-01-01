@@ -1,7 +1,11 @@
 // File: js/admin.js (VERSI FINAL + FITUR DELETE)
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadStats();
+    // WAJIB: Panggil semua ini agar data langsung muncul tanpa nunggu di-klik
+    loadStats();      // Update angka Rp 0 jadi nominal asli
+    loadDonasi();     // Isi tabel Kelola Donasi yang kosong itu
+    loadRelawan();    // Isi tabel Relawan
+    loadPetisiAdmin();// Isi tabel Petisi
 });
 
 // --- LOAD STATS ---
@@ -13,8 +17,11 @@ async function loadStats() {
         const resRelawan = await fetch('php/api_relawan.php?action=read');
         const dataRelawan = await resRelawan.json();
 
-        const pendingCount = dataDonasi.data.filter(d => d.status === 'pending').length;
-        
+        const pendingCount = dataDonasi.data.filter(d => {
+            const s = d.STATUS || d.status || ""; // Handle besar maupun kecil
+            return s.toLowerCase() === 'pending';
+        }).length;      
+
         document.getElementById('stat-uang').textContent = "Rp " + parseInt(dataDonasi.total_verified).toLocaleString('id-ID');
         document.getElementById('stat-pending').textContent = pendingCount;
         document.getElementById('stat-relawan').textContent = dataRelawan.total;
@@ -90,20 +97,20 @@ async function loadDonasi() {
         }
 
         result.data.forEach(d => {
-            let badgeClass = d.status; // pending, verified, rejected
+            // Ambil status mau dia huruf besar atau kecil dari database
+            let rawStatus = d.STATUS || d.status || 'pending'; 
+            let badgeClass = rawStatus.toLowerCase(); 
             
-            // Tombol Verifikasi
             let aksiButton = '';
-            if(d.status === 'pending') {
+            if(rawStatus.toLowerCase() === 'pending') {
                 aksiButton = `
                     <button onclick="updateStatus(${d.id}, 'verified')" style="background:green; color:white; border:none; padding:5px; border-radius:4px; cursor:pointer; margin-right:5px;">✓</button>
                     <button onclick="updateStatus(${d.id}, 'rejected')" style="background:orange; color:white; border:none; padding:5px; border-radius:4px; cursor:pointer;">X</button>
                 `;
             } else {
-                aksiButton = `<span class="muted" style="font-size:0.8rem;">${d.status}</span>`;
+                aksiButton = `<span class="muted" style="font-size:0.8rem;">${rawStatus}</span>`;
             }
 
-            // Tombol Hapus (Tong Sampah) selalu ada
             const deleteBtn = `
                 <button onclick="hapusDonasi(${d.id})" style="background:#c0392b; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer; margin-left:5px;" title="Hapus Permanen">🗑</button>
             `;
@@ -114,7 +121,7 @@ async function loadDonasi() {
                     <td><strong>${d.nama_donatur}</strong><br><small>${d.email}</small></td>
                     <td>Rp ${parseInt(d.jumlah).toLocaleString('id-ID')}</td>
                     <td><button onclick="lihatBukti('${d.bukti_transfer}')">Lihat</button></td>
-                    <td><span class="badge ${badgeClass}">${d.status.toUpperCase()}</span></td>
+                    <td><span class="badge ${badgeClass}">${rawStatus.toUpperCase()}</span></td>
                     <td>${aksiButton} ${deleteBtn}</td>
                 </tr>
             `;
