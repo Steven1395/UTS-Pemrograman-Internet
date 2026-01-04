@@ -64,7 +64,50 @@ if ($method == 'POST' && $action == 'create') {
     exit;
 }
 
-// 2. READ
+// 2. UPDATE (TAMBAHAN BARU)
+elseif ($method == 'POST' && $action == 'update') {
+    $id        = intval($_POST['id']);
+    // ... (input lainnya) ...
+
+    if ($id <= 0) {
+        ob_clean(); // <--- Tambahin ini biar outputnya selalu bersih
+        echo json_encode(["status" => "error", "message" => "ID tidak valid."]);
+        exit;
+    }
+    
+    $id        = intval($_POST['id']);
+    $nama      = $conn->real_escape_string($_POST['nama_lengkap']);
+    $email     = $conn->real_escape_string($_POST['email']);
+    $hp        = $conn->real_escape_string($_POST['no_hp']);
+    $pekerjaan = $conn->real_escape_string($_POST['pekerjaan']);
+    $domisili  = $conn->real_escape_string($_POST['domisili']);
+    $alasan    = $conn->real_escape_string($_POST['alasan']);
+
+    if ($id <= 0) {
+        echo json_encode(["status" => "error", "message" => "ID tidak valid."]);
+        exit;
+    }
+
+    $sql = "UPDATE relawan SET 
+            nama_lengkap = '$nama', 
+            email = '$email', 
+            no_hp = '$hp', 
+            pekerjaan = '$pekerjaan', 
+            domisili = '$domisili', 
+            alasan = '$alasan' 
+            WHERE id = $id";
+
+    if ($conn->query($sql)) {
+        ob_clean();
+        echo json_encode(["status" => "success", "message" => "Data relawan berhasil diperbarui!"]);
+    } else {
+        ob_clean();
+        echo json_encode(["status" => "error", "message" => "Database Error: " . $conn->error]);
+    }
+    exit;
+}
+
+// 3. READ
 elseif ($method == 'GET' || $action == 'read') {
     $result = $conn->query("SELECT * FROM relawan ORDER BY id DESC");
     $data = [];
@@ -72,7 +115,7 @@ elseif ($method == 'GET' || $action == 'read') {
     echo json_encode(["status" => "success", "data" => $data, "total" => count($data)]);
 }
 
-// 3. DELETE
+// 4. DELETE
 elseif ($method == 'POST' && $action == 'delete') {
     $id = intval($_POST['id']);
     if($id > 0) {

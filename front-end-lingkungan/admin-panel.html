@@ -169,5 +169,79 @@
             form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block' : 'none';
         }
     </script>
+    
+    <div id="modal-edit-relawan" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center; padding:20px;">
+        <div style="background:white; padding:25px; border-radius:12px; width:100%; max-width:500px; max-height:90vh; overflow-y:auto; position:relative;">
+            <h3 style="margin-bottom:20px; color:var(--green); border-bottom:2px solid #eee; padding-bottom:10px;">Edit Data Relawan</h3>
+            <form id="form-update-relawan" onsubmit="prosesUpdateRelawan(event)">
+                <input type="hidden" id="edit-rel-id">
+                <label>Nama Lengkap</label>
+                <input type="text" id="edit-rel-nama" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <label>Email</label>
+                <input type="email" id="edit-rel-email" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <label>No. HP</label>
+                <input type="text" id="edit-rel-hp" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <label>Pekerjaan</label>
+                <input type="text" id="edit-rel-pekerjaan" style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <label>Domisili</label>
+                <input type="text" id="edit-rel-domisili" style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <label>Alasan/Keahlian</label>
+                <textarea id="edit-rel-alasan" rows="3" style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px; font-family:inherit;"></textarea>
+                
+                <div style="text-align:right; margin-top:20px;">
+                    <button type="button" onclick="closeModal('modal-edit-relawan')" style="padding:10px 20px; cursor:pointer; background:#f4f4f4; border:none; border-radius:8px;">Batal</button>
+                    <button type="submit" class="btn primary">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-edit-petisi" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center; padding:20px;">
+        <div style="background:white; padding:25px; border-radius:12px; width:100%; max-width:500px; max-height:90vh; overflow-y:auto; position:relative;">
+            <h3 style="margin-bottom:20px; color:var(--green); border-bottom:2px solid #eee; padding-bottom:10px;">Edit Kampanye Petisi</h3>
+            <form id="form-update-petisi" onsubmit="prosesUpdatePetisi(event)">
+                <input type="hidden" id="edit-pet-id">
+                <label>Judul Kampanye</label>
+                <input type="text" id="edit-pet-judul" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <label>Deskripsi</label>
+                <textarea id="edit-pet-desc" rows="4" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px; font-family:inherit;"></textarea>
+                <label>Target Tanda Tangan</label>
+                <input type="number" id="edit-pet-target" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <label>Ganti Gambar (Biarkan kosong jika tidak ingin ganti)</label>
+                <input type="file" id="edit-pet-gambar" accept="image/*" style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                
+                <div style="text-align:right; margin-top:20px;">
+                    <button type="button" onclick="closeModal('modal-edit-petisi')" style="padding:10px 20px; cursor:pointer; background:#f4f4f4; border:none; border-radius:8px;">Batal</button>
+                    <button type="submit" class="btn primary">Update Kampanye</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-edit-donasi" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center; padding:20px;">
+        <div style="background:white; padding:25px; border-radius:12px; width:100%; max-width:450px; position:relative;">
+            <h3 style="margin-bottom:20px; color:var(--green); border-bottom:2px solid #eee; padding-bottom:10px;">Edit Detail Donasi</h3>
+            <form id="form-update-donasi" onsubmit="prosesUpdateDonasi(event)">
+                <input type="hidden" id="edit-don-id">
+                <label>Nama Donatur</label>
+                <input type="text" id="edit-don-nama" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <label>Email</label>
+                <input type="email" id="edit-don-email" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <label>Jumlah Donasi (Rp)</label>
+                <input type="number" id="edit-don-jumlah" required style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                <label>Status Verifikasi</label>
+                <select id="edit-don-status" style="width:100%; padding:10px; margin:8px 0; border:1px solid #ddd; border-radius:6px;">
+                    <option value="pending">Pending</option>
+                    <option value="verified">Verified</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+                
+                <div style="text-align:right; margin-top:20px;">
+                    <button type="button" onclick="closeModal('modal-edit-donasi')" style="padding:10px 20px; cursor:pointer; background:#f4f4f4; border:none; border-radius:8px;">Batal</button>
+                    <button type="submit" class="btn primary">Simpan Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

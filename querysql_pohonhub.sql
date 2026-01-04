@@ -109,3 +109,13 @@ TRUNCATE TABLE donasi;
 -- 2. Ubah user_id jadi NOT NULL dan hubungkan ke tabel users
 ALTER TABLE donasi MODIFY COLUMN user_id INT NOT NULL;
 ALTER TABLE donasi ADD CONSTRAINT fk_donasi_users FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+
+
+
+-- 1. Hapus dulu data relawan yang duplikat biar gak error pas pasang kunci
+TRUNCATE TABLE relawan;
+
+-- 2. Tambahkan UNIQUE CONSTRAINT pada user_id
+ALTER TABLE relawan ADD UNIQUE (user_id);
+

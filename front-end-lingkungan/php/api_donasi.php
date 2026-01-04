@@ -97,5 +97,37 @@ elseif ($method == 'POST' && $action == 'delete') {
     }
 }
 
+// 5. UPDATE (Admin Edit Nama/Jumlah/Status)
+elseif ($method == 'POST' && $action == 'update') {
+    $id     = intval($_POST['id']);
+    $nama   = $conn->real_escape_string($_POST['nama_donatur']);
+    $email  = $conn->real_escape_string($_POST['email']);
+    $jumlah = floatval($_POST['jumlah']);
+    $status = $conn->real_escape_string($_POST['status']); // pending, verified, rejected
+
+    if ($id <= 0) {
+        ob_clean();
+        echo json_encode(["status" => "error", "message" => "ID tidak valid."]);
+        exit;
+    }
+
+    // Gunakan nama kolom STATUS (Huruf Besar) biar sinkron sama DB lo
+    $sql = "UPDATE donasi SET 
+            nama_donatur = '$nama', 
+            email = '$email', 
+            jumlah = $jumlah, 
+            STATUS = '$status' 
+            WHERE id = $id";
+
+    if ($conn->query($sql)) {
+        ob_clean();
+        echo json_encode(["status" => "success", "message" => "Data donasi berhasil diperbarui!"]);
+    } else {
+        ob_clean();
+        echo json_encode(["status" => "error", "message" => "Database Error: " . $conn->error]);
+    }
+    exit;
+}
+
 $conn->close();
 ?>

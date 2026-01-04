@@ -109,5 +109,49 @@ elseif ($action == 'delete') {
     exit;
 }
 
+// 6. UPDATE (Admin)
+elseif ($action == 'update') {
+    $id = intval($_POST['id']);
+    $judul = $conn->real_escape_string($_POST['judul']);
+    $desc = $conn->real_escape_string($_POST['deskripsi']);
+    $target = intval($_POST['target']);
+
+    // 1. Ambil data lama dulu buat tau nama gambar lamanya
+    $cek_gambar = $conn->query("SELECT gambar FROM petisi WHERE id = $id");
+    $data_lama = $cek_gambar->fetch_assoc();
+
+    // 2. Cek apakah admin upload gambar baru?
+    if (isset($_FILES['gambar']) && $_FILES['gambar']['tmp_name'] != "") {
+        // Jika ada gambar baru
+        $newFileName = 'petisi_' . time() . '.jpg';
+        
+        if (move_uploaded_file($_FILES['gambar']['tmp_name'], "../img/" . $newFileName)) {
+            // Hapus gambar lama dari folder jika ada
+            if ($data_lama && file_exists("../img/" . $data_lama['gambar'])) {
+                unlink("../img/" . $data_lama['gambar']);
+            }
+            // Update dengan gambar baru
+            $sql = "UPDATE petisi SET judul='$judul', deskripsi='$desc', gambar='$newFileName', target_ttd=$target WHERE id=$id";
+        } else {
+            ob_clean();
+            echo json_encode(["status" => "error", "message" => "Gagal upload gambar baru."]);
+            exit;
+        }
+    } else {
+        // Jika TIDAK ganti gambar, cukup update teks saja
+        $sql = "UPDATE petisi SET judul='$judul', deskripsi='$desc', target_ttd=$target WHERE id=$id";
+    }
+
+    // 3. Eksekusi Query
+    if ($conn->query($sql)) {
+        ob_clean();
+        echo json_encode(["status" => "success", "message" => "Kampanye berhasil diperbarui!"]);
+    } else {
+        ob_clean();
+        echo json_encode(["status" => "error", "message" => "Gagal update database: " . $conn->error]);
+    }
+    exit;
+}
+
 $conn->close();
 ?>
